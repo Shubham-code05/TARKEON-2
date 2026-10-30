@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Tarkeon design tokens
+   Colours, type scale, radius, shadows and motion live here.
+   Tailwind v4 turns every token into a utility class, e.g.
+   --color-surface -> bg-surface, --text-h2 -> text-h2.
+---------------------------------------------------------------- */
+@theme static {
+  /* Colours */
+  --color-bg: #ffffff;
+  --color-bg-alt: #f6f8fc; /* every second section, see "main > section" below */
+  --color-surface: #ffffff;
+  --color-surface-2: #f6f8fc;
+  --color-surface-3: #e9edf5;
+  --color-line: #e4e7ee;
+  --color-line-strong: #c9cfda;
+  --color-fg: #0b1220;
+  --color-fg-2: #3d4656;
+  --color-muted: #5b6475; /* 5.9:1 on white, 5.6:1 on bg-alt (AA) */
+  --color-accent: #2f4bff; /* 5.9:1 on white, with white text too (AA) */
+  --color-accent-hover: #1f35d6;
+  --color-accent-2: #7c3aed; /* gradients and small highlights only */
+  --color-accent-soft: #eef1ff; /* selected chips, highlighted table column, badges */
+  --color-success: #0f8a5f; /* icons and dots: 4.4:1 on white, under AA for small text */
+  --color-success-ink: #0b7a53; /* success as text, 5.3:1 on white (AA) */
+  --color-warning: #b45309;
+  --color-danger: #b42318;
+  --color-whatsapp: #0f7a41; /* 5.4:1 with white text (AA) */
+  --color-ink: #0b1220;
+
+  /* Type scale (fluid) */
+  --text-display: clamp(2.5rem, 1.55rem + 4.2vw, 4.75rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.035em;
+  --text-h1: clamp(2.25rem, 1.6rem + 2.8vw, 3.75rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h2: clamp(1.875rem, 1.45rem + 1.8vw, 2.875rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.028em;
+  --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.015em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  /* Spacing */
+  --spacing-section: clamp(4.5rem, 3rem + 5vw, 7.5rem);
+  --spacing-gutter: 1rem;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 8px 24px -12px rgb(16 24 40 / 0.12);
+  --shadow-glow: 0 1px 2px rgb(16 24 40 / 0.04), 0 20px 48px -20px rgb(47 75 255 / 0.28);
+  --shadow-button: 0 8px 20px -10px rgb(47 75 255 / 0.5);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-word: word-in 0.7s var(--ease-out-soft) both;
+  --animate-signal: signal 4s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.45s var(--ease-out-soft) both;
+
+  @keyframes signal {
+    from {
+      stroke-dashoffset: 1000;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes word-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.35em);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+}
+
+/* The ₹ sign lives in the fonts' "latin-ext" files (~100 KB extra). Draw it with the
+   device's own font instead, so only the small "latin" files are downloaded. */
+@font-face {
+  font-family: "TkRupee";
+  src: local("Roboto"), local("Segoe UI"), local("Helvetica Neue"), local("Arial"), local("Noto Sans");
+  unicode-range: U+20B9;
+}
+
+@theme inline {
+  --font-sans: "TkRupee", var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "TkRupee", var(--font-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------- Brand utilities ---------- */
+@utility bg-brand {
+  background-image: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
+}
+@utility text-brand {
+  background-image: linear-gradient(120deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility container-site {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 48rem) {
+    padding-inline: 1.5rem;
+  }
+}
+/* Soft brand glow. A radial gradient instead of filter: blur(), which is expensive to paint */
+@utility glow-blob {
+  background: radial-gradient(closest-side, rgb(124 58 237 / 0.14), rgb(47 75 255 / 0.1) 55%, transparent);
+}
+/* Frosted glass card */
+@utility glass {
+  background: rgb(255 255 255 / 0.96);
+  border: 1px solid var(--color-line);
+  /* Real blur only on large screens; on phones it costs too much over the animated canvas */
+  @media (width >= 64rem) {
+    background: rgb(255 255 255 / 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+/* Cursor-follow spotlight. --x and --y are set by <SpotlightEffect /> */
+@utility spotlight {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(380px circle at var(--x, 50%) var(--y, -40%), rgb(47 75 255 / 0.07), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(16 24 40 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(16 24 40 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    color-scheme: light;
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* White and tinted bands take turns. Counted in CSS because some sections render
+     conditionally, so a fixed tone per section could leave two of the same side by side. */
+  main > section:nth-of-type(even) {
+    background: var(--color-bg-alt);
+    border-block: 1px solid var(--color-line);
+  }
+  ::selection {
+    background: rgb(47 75 255 / 0.18);
+    color: var(--color-fg);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* ---------- Mini visuals in the services bento ---------- */
+@keyframes bubble {
+  0%, 8% { opacity: 0; transform: translateY(6px); }
+  14%, 80% { opacity: 1; transform: none; }
+  92%, 100% { opacity: 0; }
+}
+@keyframes grow {
+  0%, 100% { transform: scaleY(0.55); }
+  50% { transform: scaleY(1); }
+}
+@keyframes flow {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+@keyframes tap {
+  0%, 100% { transform: translate(14px, 12px); }
+  45%, 55% { transform: translate(0, 0) scale(0.9); }
+}
+@keyframes rise {
+  0%, 20% { transform: translateY(56px); }
+  40%, 100% { transform: none; }
+}
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(15 122 65 / 0.45); }
+  60% { box-shadow: 0 0 0 8px rgb(15 122 65 / 0); }
+}
+
+/* ---------- Article typography (blog + legal pages) ---------- */
+.prose-tk {
+  color: var(--color-fg-2);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.prose-tk > * + * {
+  margin-top: 1.25em;
+}
+.prose-tk h2 {
+  color: var(--color-fg);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-top: 2.2em;
+  scroll-margin-top: 6rem;
+}
+.prose-tk h3 {
+  color: var(--color-fg);
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin-top: 1.8em;
+  scroll-margin-top: 6rem;
+}
+.prose-tk h2 + *,
+.prose-tk h3 + * {
+  margin-top: 0.75em;
+}
+.prose-tk a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-tk a:hover {
+  color: var(--color-accent-hover);
+}
+.prose-tk strong {
+  color: var(--color-fg);
+  font-weight: 600;
+}
+.prose-tk ul,
+.prose-tk ol {
+  padding-left: 1.4em;
+}
+.prose-tk ul {
+  list-style: disc;
+}
+.prose-tk ol {
+  list-style: decimal;
+}
+.prose-tk li + li {
+  margin-top: 0.5em;
+}
+.prose-tk li::marker {
+  color: var(--color-muted);
+}
+.prose-tk blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: 0.25em 0 0.25em 1.1em;
+  color: var(--color-fg);
+}
+.prose-tk table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose-tk th,
+.prose-tk td {
+  text-align: left;
+  padding: 0.7em 0.9em;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+.prose-tk th {
+  color: var(--color-fg);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.prose-tk hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 2.5em 0;
+}
+.prose-tk code {
+  font-size: 0.9em;
+  background: var(--color-surface-2);
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "paramount-psychiatry": {
+    "desktop": {
+      "width": 1440,
+      "height": 4200
+    },
+    "mobile": {
+      "width": 780,
+      "height": 1688
+    }
+  },
+  "dumuzi": {
+    "desktop": {
+      "width": 1440,
+      "height": 4200
+    },
+    "mobile": {
+      "width": 780,
+      "height": 1688
+    }
+  },
+  "miracle-home": {
+    "desktop": {
+      "width": 1440,
+      "height": 3200
+    },
+    "mobile": {
+      "width": 780,
+      "height": 1688
+    }
+  },
+  "abs-news": {
+    "desktop": {
+      "width": 1440,
+      "height": 1800
+    },
+    "mobile": {
+      "width": 780,
+      "height": 1688
+    }
+  }
+}
