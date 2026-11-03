@@ -31,7 +31,7 @@ export function Hero({ motto, city, project }: HeroProps) {
           <HeadlineReveal
             id="hero-title"
             text="Get more enquiries with a website and AI assistant that work 24×7."
-            highlightFrom={9}
+            highlightFrom={7}
             className="text-h1"
           />
           <p className="max-w-xl text-lead text-muted">
