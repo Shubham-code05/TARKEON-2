@@ -30,13 +30,13 @@ export function Hero({ motto, city, project }: HeroProps) {
 
           <HeadlineReveal
             id="hero-title"
-            text="Get more enquiries with a website and AI assistant that work 24×7."
-            highlightFrom={7}
-            className="text-h1"
+            text="Your business, online and bringing customers. Every day."
+            highlightFrom={4}
+            className="text-h1 lg:text-[3.25rem]"
           />
           <p className="max-w-xl text-lead text-muted">
-            We build fast websites, web apps, AI chatbots and digital marketing that bring customers to small and growing
-            businesses. Fixed price, clear deadline, in writing.
+            We build fast websites, AI chatbots and marketing that turn visitors into enquiries, for growing businesses
+            across India. Fixed price, free homepage demo.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">

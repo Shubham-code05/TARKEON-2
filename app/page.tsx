@@ -33,8 +33,23 @@ import { calculateEstimate } from "@/lib/estimate";
 import { faqSchema, localBusinessSchema } from "@/lib/schema";
 import { whatsappLink } from "@/lib/utils";
 
+const homeTitle = "Tarkeon | Websites, AI Chatbots & Digital Marketing in Lucknow";
+const homeDescription =
+  "Websites, AI chatbots and marketing that turn visitors into enquiries, for growing businesses across India. Fixed price, free homepage demo.";
+
 export const metadata: Metadata = {
+  title: { absolute: homeTitle },
+  description: homeDescription,
   alternates: { canonical: "/" },
+  openGraph: {
+    title: homeTitle,
+    description: homeDescription,
+    url: "/",
+    siteName: site.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image", title: homeTitle, description: homeDescription },
 };
 
 // Only the data the interactive parts need is sent to the browser
