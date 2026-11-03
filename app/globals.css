@@ -364,6 +364,26 @@
   border-radius: 6px;
 }
 
+/* ---------- Scroll reveal ----------
+   [data-reveal] content is visible by default. RevealObserver sets data-reveal="play" only when an
+   element scrolls into view, which runs this one-off animation. So no-JS visits, full-page screenshots
+   and reduced motion always show the content; nothing waits on JS to become visible. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="play"] {
+    animation: reveal-in 0.6s var(--ease-out-soft) var(--reveal-delay, 0s) backwards;
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {

@@ -30,12 +30,13 @@ export function Hero({ motto, city, project }: HeroProps) {
 
           <HeadlineReveal
             id="hero-title"
-            text="Build Your Digital Presence. Grow Your Business."
-            highlightFrom={4}
+            text="Get more enquiries with a website and AI assistant that work 24×7."
+            highlightFrom={9}
             className="text-h1"
           />
           <p className="max-w-xl text-lead text-muted">
-            We build powerful websites, custom web applications and intelligent digital solutions that help businesses grow.
+            We build fast websites, web apps, AI chatbots and digital marketing that bring customers to small and growing
+            businesses. Fixed price, clear deadline, in writing.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">

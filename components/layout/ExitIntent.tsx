@@ -7,10 +7,34 @@ import { Icon } from "@/components/Icon";
 import { buttonClasses } from "@/components/ui/Button";
 
 const SESSION_KEY = "tk-exit-shown";
+const MIN_TIME_MS = 15_000;
+const MIN_SCROLL = 0.4;
+
+// Fallback for when sessionStorage is blocked (private mode, strict cookie settings):
+// still show at most once per page load.
+let shownWithoutStorage = false;
+
+function alreadyShown(): boolean {
+  try {
+    return window.sessionStorage.getItem(SESSION_KEY) === "1" || shownWithoutStorage;
+  } catch {
+    return shownWithoutStorage;
+  }
+}
+
+function markShown() {
+  shownWithoutStorage = true;
+  try {
+    window.sessionStorage.setItem(SESSION_KEY, "1");
+  } catch {
+    // storage blocked: the in-memory flag above covers this page load
+  }
+}
 
 /**
- * Desktop only, once per session: when the cursor leaves through the top of the window,
- * offer the free website check. Small, non-blocking, easy to close.
+ * Desktop only (1024px+, mouse), once per session. Shows only after the visitor has engaged
+ * (15 seconds on the page or 40% scrolled) and then moves the cursor out through the top of the window.
+ * Never on page load, never on touch devices. Closes with Esc or the close button.
  */
 export function ExitIntent() {
   const pathname = usePathname();
@@ -20,24 +44,36 @@ export function ExitIntent() {
   useEffect(() => {
     if (pathname === "/contact") return;
     if (!window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches) return;
-    try {
-      if (window.sessionStorage.getItem(SESSION_KEY)) return;
-    } catch {
-      return;
+    if (alreadyShown()) return;
+
+    let engaged = false;
+    const timer = window.setTimeout(() => {
+      engaged = true;
+    }, MIN_TIME_MS);
+
+    function onScroll() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable > 0 && window.scrollY / scrollable >= MIN_SCROLL) engaged = true;
     }
-    const armedAt = Date.now();
+
     function onLeave(e: MouseEvent) {
-      if (e.relatedTarget || e.clientY > 0 || Date.now() - armedAt < 8000) return;
-      try {
-        window.sessionStorage.setItem(SESSION_KEY, "1");
-      } catch {
-        // ignore
-      }
+      // Only a real exit: the cursor left the document (no element it moved to) through the top edge
+      if (!engaged || e.relatedTarget !== null || e.clientY > 0) return;
+      if (!window.matchMedia("(min-width: 1024px)").matches || alreadyShown()) return;
+      markShown();
       setOpen(true);
+      cleanup();
+    }
+
+    function cleanup() {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mouseout", onLeave);
     }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("mouseout", onLeave);
-    return () => document.removeEventListener("mouseout", onLeave);
+    return cleanup;
   }, [pathname]);
 
   useEffect(() => {

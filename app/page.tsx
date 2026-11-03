@@ -59,6 +59,7 @@ const homeIndustries: HomeIndustry[] = industries.map((ind) => {
     packageHref: `/pricing?${params.toString()}#calculator`,
     packagePreset: { type: pkg.type, pages: pkg.pages, addons: pkg.addons },
     problems: ind.problems.filter((p) => p.solution).map((p) => ({ title: p.title, text: p.text, solution: p.solution! })),
+    solutions: ind.solutions.map((s) => ({ title: s.title, text: s.text })),
     faqs: ind.faqs,
     photo: industryPhotos(ind.slug)[0],
   };
@@ -111,16 +112,18 @@ export default function Home() {
       <TarkDivider />
 
       <Section id="website-check" aria-labelledby="check-title">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
-          <SectionHeader
-            eyebrow="Free website check"
-            id="check-title"
-            title="Is your current website losing customers?"
-            description="Check it free in 20 seconds. We run Google’s own PageSpeed test on your site and tell you what’s wrong in plain English."
-            className="lg:sticky lg:top-28 lg:mb-0 lg:self-start"
-          />
-          <WebsiteCheck whatsappNumber={site.whatsapp} />
-        </div>
+        <WebsiteCheck
+          whatsappNumber={site.whatsapp}
+          header={
+            <SectionHeader
+              eyebrow="Free website check"
+              id="check-title"
+              title="Is your website losing customers?"
+              description="Get Google’s speed and SEO scores for your site in about 20 seconds."
+              className="mb-0! md:mb-0!"
+            />
+          }
+        />
       </Section>
 
       <Section aria-labelledby="services-title">
@@ -202,13 +205,25 @@ export default function Home() {
 
       <Section aria-labelledby="process-title">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="flex flex-col gap-2 lg:sticky lg:top-28 lg:self-start">
-            <SectionHeader eyebrow="How we work" id="process-title" title="From first call to launch, with no surprises." className="mb-0 md:mb-0" />
-            <SectionAction>
-              <Link href="/process" className={buttonClasses("secondary", "lg")}>
-                See the full process <Icon name="arrow" size={18} />
+          <div className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
+            <SectionHeader
+              eyebrow="How we work"
+              id="process-title"
+              title="From first call to launch, step by step."
+              description={`Every stage has a clear timeline and you approve each one. You see a free homepage demo within ${site.demoPromise}, before you commit.`}
+              className="mb-0! md:mb-0!"
+            />
+            <div className="flex flex-col items-start gap-3">
+              <Link href="/contact" className={buttonClasses("primary", "lg")}>
+                Get a free homepage demo <Icon name="arrow" size={18} />
               </Link>
-            </SectionAction>
+              <Link
+                href="/process"
+                className="inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-medium text-accent hover:text-accent-hover"
+              >
+                See the full process <Icon name="arrow" size={16} />
+              </Link>
+            </div>
           </div>
           <ProcessScroll steps={steps} />
         </div>
@@ -218,14 +233,14 @@ export default function Home() {
 
       <Section aria-labelledby="faq-title">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
-          <SectionHeader
-            eyebrow="FAQ"
-            id="faq-title"
-            title="Questions people ask before they call"
-            className="lg:sticky lg:top-28 lg:mb-0 lg:self-start"
-          />
-          <div className="flex flex-col gap-8">
-            <HomeFaq general={faqs.slice(0, 9)} />
+          <div className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
+            <SectionHeader
+              eyebrow="Questions"
+              id="faq-title"
+              title="Answers before you ask."
+              description="Cost, timelines, hosting, SEO and what happens after launch. Don’t see your question? Ask us directly."
+              className="mb-0! md:mb-0!"
+            />
             <a
               href={whatsappLink("Hi Tarkeon, I have a question that isn't in your FAQ.")}
               target="_blank"
@@ -235,6 +250,7 @@ export default function Home() {
               <Icon name="whatsapp" size={18} /> Ask us on WhatsApp
             </a>
           </div>
+          <HomeFaq general={faqs.slice(0, 9)} />
         </div>
       </Section>
 
@@ -247,7 +263,10 @@ export default function Home() {
             <h2 id="final-cta" className="mx-auto max-w-3xl text-h1 text-white">
               Let’s Build Something Great Together.
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lead text-white/90">
+            <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold text-white">
+              Free homepage demo in {site.demoPromise}. No commitment.
+            </p>
+            <p className="mx-auto mt-3 max-w-2xl text-lead text-white/90">
               Tell us about your business idea and let our team help you bring it to life.
             </p>
             <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">

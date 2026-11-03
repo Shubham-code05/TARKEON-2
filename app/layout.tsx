@@ -12,6 +12,7 @@ import { Header } from "@/components/layout/Header";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { RevealObserver } from "@/components/motion/RevealObserver";
 import { site } from "@/content/site";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ExitIntent />
         </MotionProvider>
         <SpotlightEffect />
+        <RevealObserver />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {onVercel && (
           <>

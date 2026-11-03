@@ -22,6 +22,8 @@ export type HomeIndustry = {
   packageHref: string;
   packagePreset: { type: string; pages?: number; addons: string[] };
   problems: { title: string; text: string; solution: string }[];
+  /** What we'd build for this kind of business. */
+  solutions: { title: string; text: string }[];
   faqs: Faq[];
   photo: IndustryPhoto;
 };

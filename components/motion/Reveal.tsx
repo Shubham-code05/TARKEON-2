@@ -1,7 +1,4 @@
-"use client";
-
-import { m, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -11,19 +8,17 @@ type RevealProps = {
   as?: "div" | "li" | "article";
 };
 
-/** Fades and lifts content in once when it scrolls into view. Use below the fold only. */
-export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
-  const reduce = useReducedMotion();
-  const Component = as === "li" ? m.li : as === "article" ? m.article : m.div;
+/**
+ * Fades and lifts content in when it scrolls into view. The content is never hidden by default:
+ * <RevealObserver /> only adds `data-reveal="play"` (which runs a short CSS animation) once the element
+ * actually enters the viewport. Without JS, under reduced motion, in a full-page screenshot or if
+ * anything fails, the content simply shows, with no animation.
+ */
+export function Reveal({ children, className, delay = 0, as: Tag = "div" }: RevealProps) {
+  const style = delay > 0 ? ({ "--reveal-delay": `${delay}s` } as CSSProperties) : undefined;
   return (
-    <Component
-      className={className}
-      initial={reduce ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -60px 0px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <Tag className={className} style={style} data-reveal="">
       {children}
-    </Component>
+    </Tag>
   );
 }
