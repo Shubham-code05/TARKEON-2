@@ -1,8 +1,9 @@
 node_modules
 .next
 out
-.env*.local
-.env
+# Env files hold secrets; only the empty template is committed
+.env*
+!.env.example
 .vercel
 .DS_Store
 *.tsbuildinfo
