@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
-  description: "The terms for using the Tarkeon website and for projects we build: quotes, payments, ownership, support and liability.",
+  description: "The terms for using the Tarkeon website and for the projects we build: quotes and scope, payments, timelines, ownership, support, AI features and liability.",
   path: "/terms",
 });
 

@@ -39,6 +39,10 @@ export const metadata: Metadata = {
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   formatDetection: { telephone: false, email: false, address: false },
+  // Google Search Console: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION on Vercel (the content="" value from the HTML tag method)
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
   openGraph: {
     title: "Tarkeon | Websites, AI Chatbots and Automation",
     description: site.description,

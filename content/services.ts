@@ -12,10 +12,10 @@ export const services: Service[] = [
     icon: "monitor",
     summary: "Fast, mobile-first websites that look professional, rank on Google and turn visitors into enquiries.",
     benefits: ["Mobile-first design in your brand colours","WhatsApp button, click-to-call and contact form","Domain, code and accounts in your name"],
-    seoTitle: "Business Website Design in Lucknow",
+    seoTitle: "Website Design in Lucknow for Small Businesses",
     seoDescription:
-      "Fast, mobile-first business websites from ₹9,999. WhatsApp button, contact form, Google-ready SEO and a free demo before you pay in full.",
-    headline: "A website that brings in enquiries, not just compliments.",
+      "Website design in Lucknow for small businesses, from ₹9,999: fast, mobile-first sites with WhatsApp, contact forms, SEO and a free demo first.",
+    headline: "Website design in Lucknow that brings in enquiries, not just compliments.",
     intro:
       "Most customers look you up on their phone before they call. We build fast, clear websites that answer their questions, show why they should pick you and make it one tap to contact you.",
     problems: [
@@ -83,7 +83,7 @@ export const services: Service[] = [
     seoTitle: "E-commerce Website Development in Lucknow",
     seoDescription:
       "Online stores for Indian businesses from ₹14,999: product catalogue, cart, UPI and card payments and order alerts. Free demo before you pay in full.",
-    headline: "An online store your customers can actually buy from.",
+    headline: "E-commerce website development for a store your customers can actually buy from.",
     intro:
       "Selling over WhatsApp works until orders pile up. We build simple, fast online stores with a clear catalogue, an easy checkout and payments your customers already trust.",
     problems: [
@@ -146,7 +146,7 @@ export const services: Service[] = [
     seoTitle: "Custom Web App Development for Small Businesses",
     seoDescription:
       "Custom web apps from ₹39,999: bookings, fee management, orders, dashboards and admin panels for Indian small businesses. Weekly demos, fixed quote.",
-    headline: "Stop running your business on paper registers and spreadsheets.",
+    headline: "Custom web app development for businesses that have outgrown paper registers and spreadsheets.",
     intro:
       "When bookings, fees or orders live in notebooks, Excel files and WhatsApp chats, things get missed. We build a simple web app that keeps everything in one place, works on any phone and fits the way your team already works.",
     problems: [
@@ -211,10 +211,10 @@ export const services: Service[] = [
     icon: "chat",
     summary: "An assistant trained on your business that answers questions and takes enquiries 24×7 on website and WhatsApp.",
     benefits: ["Trained on your prices, timings and policies","Replies in English, Hindi and Hinglish","Leads sent to your email or sheet"],
-    seoTitle: "AI Chatbot for Website and WhatsApp",
+    seoTitle: "WhatsApp and Website AI Chatbot for Business",
     seoDescription:
       "AI chatbots for small businesses that answer customer questions in English, Hindi and Hinglish, capture leads and book appointments on your website or WhatsApp.",
-    headline: "Answer every customer, even at 11 pm.",
+    headline: "An AI chatbot for your business that answers every customer, even at 11 pm.",
     intro:
       "Customers ask the same questions again and again: fees, timings, location, availability. An AI assistant trained on your own information answers them instantly, collects the customer’s details and hands real conversations to you.",
     problems: [
@@ -283,7 +283,7 @@ export const services: Service[] = [
     seoTitle: "Business Process Automation for Small Businesses",
     seoDescription:
       "Automate lead capture, WhatsApp and email follow-ups, payment reminders and daily reports. Simple automations for Indian small businesses, from ₹7,999.",
-    headline: "Let the repetitive work run itself.",
+    headline: "Business automation for small businesses: let the repetitive work run itself.",
     intro:
       "Copying leads into a sheet, sending fee reminders, making the daily sales report: these jobs are important but boring, and they get skipped on busy days. We connect the tools you already use so these tasks happen automatically.",
     problems: [
@@ -343,10 +343,10 @@ export const services: Service[] = [
     icon: "layout",
     summary: "One focused page for an ad, an admission season or a launch, built to get as many enquiries as possible.",
     benefits: ["One page with one clear goal","Built for ads, launches and admission seasons","Fast on mobile data"],
-    seoTitle: "Landing Page Design for Ads and Campaigns",
+    seoTitle: "Landing Page Design for Google and Meta Ads",
     seoDescription:
       "High-converting landing pages for Google and Meta ads, admission campaigns and launches. Fast, mobile-first, with lead forms and tracking. From ₹5,999.",
-    headline: "One page, one goal: more enquiries from your ads.",
+    headline: "Landing page design with one goal: more enquiries from your ads.",
     intro:
       "Sending ad traffic to your homepage wastes money. A landing page talks about one offer, answers objections and makes it very easy to call, WhatsApp or fill a form, so more of the people you pay for actually contact you.",
     problems: [
@@ -401,10 +401,10 @@ export const services: Service[] = [
     icon: "search",
     summary: "Google Business Profile setup and on-page SEO so nearby customers find you on Google Search and Maps.",
     benefits: ["Google Business Profile setup","On-page titles, descriptions and sitemap","Honest advice on what to expect"],
-    seoTitle: "Local SEO and Google Business Profile Setup",
+    seoTitle: "SEO Services in Lucknow for Small Businesses",
     seoDescription:
-      "Get found on Google Maps and Search. Google Business Profile setup and optimisation plus on-page SEO for your website, from ₹4,999. Honest, no fake promises.",
-    headline: "Show up when people nearby search for what you do.",
+      "SEO services in Lucknow for small businesses: Google Business Profile setup, local SEO and on-page SEO, from ₹4,999. Honest work, no fake promises.",
+    headline: "SEO services in Lucknow, so people nearby find you when they search.",
     intro:
       "When someone searches “coaching near me” or “dentist in Gomti Nagar”, Google shows the map listings first. A complete, accurate Google Business Profile and a well-structured website are the basics that give you a fair chance to appear.",
     problems: [

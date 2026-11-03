@@ -10,7 +10,7 @@ import { industries } from "@/content/industries";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Industries We Serve: Coaching, Clinics, Restaurants and More",
+  title: "Websites for Coaching, Clinics, Shops and More",
   description:
     "Websites, AI chatbots and automation designed for coaching institutes, clinics, restaurants, real estate businesses and local shops in India.",
   path: "/industries",

@@ -14,7 +14,7 @@ import { testimonials } from "@/content/testimonials";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Our Work: Case Studies",
+  title: "Portfolio: Websites and Web Apps We Have Built",
   description:
     "Websites, web apps, AI chatbots and automations built by Tarkeon. Each case study shows the problem, what we built, the tech stack and a live link.",
   path: "/work",

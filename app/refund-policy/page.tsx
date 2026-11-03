@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Refund Policy",
-  description: "When and how Tarkeon refunds payments: advances, cancelled projects, care plans and third-party costs.",
+  description: "When and how Tarkeon refunds payments: advances before and after work starts, cancelled projects, care plans, third-party costs and how to ask for a refund.",
   path: "/refund-policy",
 });
 

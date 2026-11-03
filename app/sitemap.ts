@@ -2,17 +2,19 @@ import type { MetadataRoute } from "next";
 import { industries } from "@/content/industries";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
-import { legalLastUpdated, type LegalPath } from "@/content/site";
+import { legalLastUpdated, pagesLastUpdated, type LegalPath } from "@/content/site";
 import { getAllPosts } from "@/lib/blog";
 import { absoluteUrl } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // A fixed content date, not the build time, so lastmod only moves when pages really change
+  const now = new Date(pagesLastUpdated);
   const staticPages: [string, number, MetadataRoute.Sitemap[number]["changeFrequency"]][] = [
     ["/", 1, "weekly"],
     ["/services", 0.9, "monthly"],
     ["/industries", 0.8, "monthly"],
     ["/pricing", 0.9, "monthly"],
+    ["/website-design-lucknow", 0.9, "monthly"],
     ["/work", 0.7, "weekly"],
     ["/process", 0.6, "monthly"],
     ["/about", 0.6, "monthly"],

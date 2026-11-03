@@ -14,9 +14,9 @@ import { services } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Services: Websites, Web Apps, AI Chatbots and Automation",
+  title: "Services: Websites, Web Apps, AI Chatbots and SEO",
   description:
-    "Business websites, custom web apps, AI chatbots, automation, landing pages and local SEO for small businesses in Lucknow and across India. Clear starting prices.",
+    "Website design, web apps, AI chatbots, automation, landing pages and SEO for small businesses in Lucknow and across India, with clear starting prices.",
   path: "/services",
 });
 

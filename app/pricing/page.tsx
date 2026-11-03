@@ -16,9 +16,9 @@ import { pageMetadata } from "@/lib/metadata";
 import { cn, formatINR } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Pricing: Website, AI Chatbot and Web App Costs",
+  title: "Website Design Cost in India: Clear Prices",
   description:
-    "Clear starting prices: websites from ₹9,999, website + AI chatbot from ₹24,999, custom web apps from ₹39,999. Try the cost calculator. 50% after approval.",
+    "Website design cost in India, made clear: websites from ₹9,999, website + AI chatbot from ₹24,999, web apps from ₹39,999. Fixed quotes from Lucknow.",
   path: "/pricing",
 });
 
@@ -26,8 +26,8 @@ export default function PricingPage() {
   return (
     <>
       <PageHero
-        title="Clear starting prices. Final quote in writing."
-        description="Every project gets a fixed price after a free call. Pay 50% to start and the rest only after you approve the work."
+        title="Website design cost in India, with the final quote in writing."
+        description="Clear starting prices for websites, AI chatbots and web apps. Every project gets a fixed price after a free call. Pay 50% to start and the rest only after you approve the work."
         actions={
           <>
             <Button href="#calculator" size="lg">

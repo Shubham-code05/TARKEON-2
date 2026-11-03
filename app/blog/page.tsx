@@ -8,9 +8,9 @@ import { getAllPosts, toMeta } from "@/lib/blog";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Blog: Practical Guides on Websites, AI and Automation",
+  title: "Blog: Guides on Websites, AI Chatbots and SEO",
   description:
-    "Plain-English guides for small business owners in India: website costs, AI chatbots, automation and getting more enquiries online.",
+    "Plain-English guides for small business owners in India: what a website costs, what AI chatbots can do, local SEO and getting more enquiries online.",
   path: "/blog",
 });
 

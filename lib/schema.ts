@@ -19,6 +19,13 @@ function postalAddress() {
   };
 }
 
+function areaServed() {
+  return [
+    { "@type": "City", name: "Lucknow" },
+    { "@type": "Country", name: "India" },
+  ];
+}
+
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -28,6 +35,7 @@ export function organizationSchema() {
     url: site.url,
     logo: absoluteUrl("/logo.png"),
     email: site.email,
+    ...(site.phone ? { telephone: site.phone } : {}),
     description: site.description,
     address: postalAddress(),
     ...(site.foundedYear ? { foundingDate: String(site.foundedYear) } : {}),
@@ -50,15 +58,22 @@ export function localBusinessSchema() {
     "@id": businessId,
     name: site.name,
     url: site.url,
+    logo: absoluteUrl("/logo.png"),
     image: absoluteUrl("/opengraph-image"),
     email: site.email,
     ...(site.phone ? { telephone: site.phone } : {}),
     description: site.description,
     address: postalAddress(),
-    areaServed: [
-      { "@type": "City", name: "Lucknow" },
-      { "@type": "Country", name: "India" },
+    areaServed: areaServed(),
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: site.openingHours.days,
+        opens: site.openingHours.opens,
+        closes: site.openingHours.closes,
+      },
     ],
+    ...(site.socials.length ? { sameAs: site.socials.map((s) => s.href) } : {}),
     priceRange: "₹₹",
     parentOrganization: { "@id": orgId },
   };
@@ -85,7 +100,7 @@ export function serviceSchema(service: Service) {
     description: service.seoDescription,
     url: absoluteUrl(`/services/${service.slug}`),
     provider: { "@id": businessId },
-    areaServed: { "@type": "Country", name: "India" },
+    areaServed: areaServed(),
     offers: {
       "@type": "Offer",
       priceCurrency: "INR",

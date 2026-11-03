@@ -12,8 +12,8 @@ import { localBusinessSchema } from "@/lib/schema";
 import { mailtoLink, telLink, whatsappLink } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact: Book a Free Consultation",
-  description: `Tell us about your business and get honest advice, a free demo and a fixed quote. WhatsApp ${site.whatsappDisplay} or email ${site.email}. Based in Lucknow.`,
+  title: "Contact: Free Website Consultation in Lucknow",
+  description: `Tell us about your business and get honest advice, a free homepage demo and a fixed quote. Call or WhatsApp ${site.whatsappDisplay}. Based in Lucknow.`,
   path: "/contact",
 });
 
@@ -93,7 +93,7 @@ export default function ContactPage() {
             <ContactRow icon="map-pin" title="Location">
               <p>
                 {site.address.street ? `${site.address.street}, ` : ""}
-                {site.address.city}, {site.address.region}, {site.address.countryName}
+                {site.addressDisplay}
               </p>
               <a href={site.mapUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-10 items-center gap-1.5 font-medium text-accent hover:text-accent-hover">
                 Open in Google Maps <Icon name="external" size={14} />

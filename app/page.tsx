@@ -146,7 +146,7 @@ export default function Home() {
           eyebrow="Services"
           id="services-title"
           title="Everything you need to win customers online."
-          description="Start with the one thing that pays off fastest. Add more as you grow."
+          description="Website design and web development in Lucknow, AI chatbots for business and SEO. Start with the one thing that pays off fastest, then add more as you grow."
         />
         <ServicesBento services={homeServiceSlugs.flatMap((slug) => services.find((s) => s.slug === slug) ?? [])} />
         <SectionAction>

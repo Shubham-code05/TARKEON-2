@@ -11,6 +11,7 @@ const company = [
   { label: "Portfolio", href: "/work" },
   { label: "Process", href: "/process" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Website design in Lucknow", href: "/website-design-lucknow" },
   { label: "Blog", href: "/blog" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
@@ -71,7 +72,7 @@ export function Footer() {
               </li>
             )}
             <li className="inline-flex min-h-9 items-center gap-2.5 text-fg-2">
-              <Icon name="map-pin" size={16} className="text-muted" /> {site.address.city}, {site.address.region}
+              <Icon name="map-pin" size={16} className="text-muted" /> {site.addressDisplay}
             </li>
           </ul>
           {site.socials.length > 0 && (

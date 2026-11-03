@@ -8,10 +8,10 @@ export const industries: Industry[] = [
     name: "Coaching institutes",
     icon: "graduation",
     summary: "Admissions enquiries, batch details, fee reminders and parent updates, without the phone chaos.",
-    seoTitle: "Websites and Software for Coaching Institutes",
+    seoTitle: "Website for Coaching Institutes in Lucknow",
     seoDescription:
-      "Websites, admission landing pages, fee management and AI chatbots for coaching institutes and tuition centres in Lucknow and across India.",
-    headline: "More admissions, fewer phone calls about the same batch timings.",
+      "Website for coaching institutes and tuition centres: admission landing pages, fee management and AI chatbots, built in Lucknow for institutes across India.",
+    headline: "A website for your coaching institute that brings more admissions and fewer repeat calls.",
     intro:
       "Parents and students compare three or four institutes before they visit. A clear website with courses, faculty, results you can prove and fees makes you the easy choice, and the right tools take admin off your desk.",
     problems: [
@@ -121,10 +121,10 @@ export const industries: Industry[] = [
     name: "Clinics and doctors",
     icon: "stethoscope",
     summary: "Online appointments, reminders and a trustworthy web presence for clinics, dentists and diagnostic centres.",
-    seoTitle: "Websites and Appointment Booking for Clinics",
+    seoTitle: "Clinic Website and Appointment Booking System",
     seoDescription:
-      "Clinic websites, online appointment booking, WhatsApp reminders and Google Business Profile setup for doctors, dentists and clinics in India.",
-    headline: "Let patients book in seconds, and come on time.",
+      "Clinic website and appointment booking for doctors, dentists and clinics in India, with WhatsApp reminders and Google Business Profile setup.",
+    headline: "Clinic website and appointment booking, so patients book in seconds and come on time.",
     intro:
       "Patients want to check timings, doctor details and directions, then book without waiting on hold. We help clinics look trustworthy online and run appointments smoothly, while keeping patient data private.",
     problems: [
@@ -230,10 +230,10 @@ export const industries: Industry[] = [
     name: "Restaurants and cafés",
     icon: "utensils",
     summary: "Menus that load fast, direct orders and table bookings, and a Google listing that brings people in.",
-    seoTitle: "Websites and WhatsApp Ordering for Restaurants",
+    seoTitle: "Restaurant Website with Online WhatsApp Ordering",
     seoDescription:
-      "Restaurant and café websites with fast digital menus, table booking, direct WhatsApp ordering and Google Maps setup for restaurants in India.",
-    headline: "Fill more tables and take orders without the commission.",
+      "Restaurant website with online ordering: fast digital menus, table booking, direct WhatsApp orders and Google Maps setup for restaurants and cafés in India.",
+    headline: "A restaurant website with online ordering, so you fill more tables without the commission.",
     intro:
       "Hungry customers decide in seconds. A fast menu, real photos, clear timings and a direct way to order or book bring them to you, and direct orders mean you keep more of every bill.",
     problems: [
@@ -333,10 +333,10 @@ export const industries: Industry[] = [
     name: "Real estate",
     icon: "building",
     summary: "Property listings, project landing pages and fast lead follow-up for brokers and developers.",
-    seoTitle: "Real Estate Websites and Lead Management",
+    seoTitle: "Real Estate Websites in Lucknow with Lead Capture",
     seoDescription:
-      "Property listing websites, project landing pages, lead capture and instant WhatsApp follow-up for real estate brokers and developers in Lucknow and India.",
-    headline: "Reply to property leads in minutes, not days.",
+      "Real estate website design in Lucknow: property listings, project landing pages, lead capture and instant WhatsApp follow-up for brokers and developers.",
+    headline: "Real estate websites in Lucknow that help you reply to property leads in minutes, not days.",
     intro:
       "In real estate, the first agent to reply usually gets the site visit. We build listing websites and project pages that capture serious buyers, and automations that put every lead in front of you straight away.",
     problems: [
@@ -445,7 +445,7 @@ export const industries: Industry[] = [
     seoTitle: "Websites and Google Listings for Local Businesses",
     seoDescription:
       "Affordable websites, WhatsApp catalogues, Google Business Profile setup and simple automation for local shops, salons, gyms and service businesses in India.",
-    headline: "Get found by people nearby who are ready to buy.",
+    headline: "Websites and Google listings for local businesses, so people nearby find you when they are ready to buy.",
     intro:
       "Most local customers search on Google Maps, check photos and reviews, then message on WhatsApp. We make sure you show up properly at every step, without expensive tools you don’t need.",
     problems: [

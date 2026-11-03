@@ -114,7 +114,7 @@ export default async function ServicePage({ params }: Props) {
           <SectionHeader
             eyebrow="What you get"
             id="deliverables-title"
-            title={`Included in ${service.shortTitle.toLowerCase()}`}
+            title={`What you get with ${service.shortTitle}`}
             description="Everything below is agreed in your written quote, so you know exactly what you are paying for."
             className="lg:mb-0"
           />

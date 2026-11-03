@@ -29,12 +29,16 @@ export const site = {
     country: "IN",
     countryName: "India",
   },
+  // NAP (name, address, phone) ek hi format mein: footer, contact page aur JSON-LD sab yahi use karte hain
+  addressDisplay: "Lucknow, Uttar Pradesh, India",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Lucknow%2C+Uttar+Pradesh",
   // TODO: apne asli office hours confirm karo
   hours: [
     { days: "Monday to Saturday", time: "10:00 am – 7:00 pm IST" },
     { days: "Sunday", time: "Closed (WhatsApp messages answered on Monday)" },
   ],
+  // Same hours in schema.org format, for the LocalBusiness JSON-LD
+  openingHours: { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "10:00", closes: "19:00" },
   replyTime: "1 working day",
   // Social profiles: { label: "LinkedIn", href: "https://..." }. Khaali rahe toh footer mein nahi dikhega.
   socials: [] as { label: string; href: string }[],
@@ -122,6 +126,9 @@ export const legalNav = [
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Refund policy", href: "/refund-policy" },
 ];
+
+// Sitemap ka lastModified. Kisi page ka content badlo toh yahan uski date badlo (blog posts apni date khud dete hain).
+export const pagesLastUpdated = "2026-11-04";
 
 // Legal pages pe "Last updated" date, har page ki alag. Policy badlo toh usi page ki date badlo.
 export const legalLastUpdated = {

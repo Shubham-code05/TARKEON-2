@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { PageHero } from "@/components/sections/PageHero";
-import { RelatedProjects } from "@/components/sections/Related";
+import { RelatedPosts, RelatedProjects } from "@/components/sections/Related";
 import { Checklist } from "@/components/sections/Trust";
 import { Badge } from "@/components/ui/Badge";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
@@ -17,6 +17,7 @@ import { getIndustry } from "@/content/industries";
 import { getProject, projects, workCategories } from "@/content/projects";
 import { getService } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
+import { getAllPosts, toMeta } from "@/lib/blog";
 import { pageMetadata } from "@/lib/metadata";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -31,7 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return pageMetadata({ title: `${project.name}: Case Study`, description: project.summary, path: `/work/${slug}` });
+  // Longest form that keeps the full title (with " | Tarkeon") around 60 characters
+  const detail = project.tag?.split("·")[1]?.trim();
+  const long = detail ? `${project.name} Case Study: ${detail}` : "";
+  const short = `${project.name}: Website Case Study`;
+  const title = long && long.length <= 53 ? long : short.length <= 50 ? short : `${project.name}: Case Study`;
+  const description = project.summary.length < 120 ? `${project.summary} A case study by Tarkeon, a web studio in Lucknow.` : project.summary;
+  return pageMetadata({ title, description, path: `/work/${slug}` });
 }
 
 export default async function CaseStudyPage({ params }: Props) {
@@ -202,6 +209,12 @@ export default async function CaseStudyPage({ params }: Props) {
       )}
 
       <RelatedProjects projects={more} title="More projects like this" />
+      <RelatedPosts
+        posts={getAllPosts()
+          .filter((p) => p.industries.includes(project.industry) || p.services.some((s) => project.services.includes(s)))
+          .map(toMeta)}
+        title="Guides for projects like this"
+      />
       <CtaBand title="Want something like this for your business?" />
     </>
   );

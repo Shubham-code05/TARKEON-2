@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Careers: Freelancers and Interns",
+  title: "Careers: Web Development Freelancers and Interns",
   description:
     "No open full-time roles right now, but Tarkeon is happy to talk to freelancers and interns in web development, design, content and automation.",
   path: "/careers",

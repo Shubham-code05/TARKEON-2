@@ -14,7 +14,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { localBusinessSchema } from "@/lib/schema";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Tarkeon: A Web, AI and Automation Studio in Lucknow",
+  title: "About Us: A Web and AI Studio in Lucknow",
   description:
     "Why we started Tarkeon, what the name means and the values behind how we build websites, web apps and AI tools for small businesses in India.",
   path: "/about",

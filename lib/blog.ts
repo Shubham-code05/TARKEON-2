@@ -11,6 +11,8 @@ const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 export type PostMeta = {
   slug: string;
   title: string;
+  /** Optional shorter title for search results; the page heading keeps the full title. */
+  seoTitle?: string;
   description: string;
   date: string;
   updated?: string;
@@ -59,11 +61,12 @@ function parseFile(file: string): Post {
   return {
     slug,
     title: String(data.title),
+    seoTitle: data.seoTitle ? String(data.seoTitle) : undefined,
     description: String(data.description),
     date: new Date(data.date).toISOString().slice(0, 10),
     updated: data.updated ? new Date(data.updated).toISOString().slice(0, 10) : undefined,
     category: String(data.category),
-    author: String(data.author ?? "Tarkeon team"),
+    author: String(data.author ?? "Tarkeon"),
     readingMinutes: readingTime(content),
     services: Array.isArray(data.services) ? data.services.map(String) : [],
     industries: Array.isArray(data.industries) ? data.industries.map(String) : [],

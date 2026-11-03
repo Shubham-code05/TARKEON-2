@@ -5,13 +5,14 @@ import { Mdx } from "@/components/blog/Mdx";
 import { ShareButtons } from "@/components/blog/ShareButtons";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
-import { RelatedPosts } from "@/components/sections/Related";
+import { RelatedPosts, RelatedProjects } from "@/components/sections/Related";
 import { Badge } from "@/components/ui/Badge";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Card, IconTile } from "@/components/ui/Card";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Container } from "@/components/ui/Section";
 import { getIndustry } from "@/content/industries";
+import { projects } from "@/content/projects";
 import { getService } from "@/content/services";
 import { getAllPosts, getPost, getRelatedPosts } from "@/lib/blog";
 import { pageMetadata } from "@/lib/metadata";
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(slug);
   if (!post) return {};
   return pageMetadata({
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     path: `/blog/${slug}`,
     type: "article",
@@ -48,6 +49,7 @@ export default async function PostPage({ params }: Props) {
   const related = getRelatedPosts(post.slug);
   const relatedServices = post.services.flatMap((s) => getService(s) ?? []);
   const relatedIndustries = post.industries.flatMap((s) => getIndustry(s) ?? []);
+  const relatedProjects = projects.filter((p) => post.industries.includes(p.industry) || p.services.some((s) => post.services.includes(s)));
   const toc = post.headings.filter((h) => h.level === 2);
   const url = absoluteUrl(`/blog/${post.slug}`);
 
@@ -186,6 +188,7 @@ export default async function PostPage({ params }: Props) {
         </Container>
       </article>
 
+      <RelatedProjects projects={relatedProjects} title="Projects we have built" />
       <RelatedPosts posts={related} title="Keep reading" />
       <CtaBand />
       <JsonLd data={articleSchema(post)} />
