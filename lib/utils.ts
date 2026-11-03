@@ -18,6 +18,16 @@ export function whatsappLink(message?: string): string {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
+/** tel: link for the call number, or null when no phone is set. */
+export function telLink(): string | null {
+  return site.phone ? `tel:${site.phone.replace(/[^\d+]/g, "")}` : null;
+}
+
+/** mailto: link for the site email. */
+export function mailtoLink(): string {
+  return `mailto:${site.email}`;
+}
+
 /** Absolute URL for a site path, e.g. "/services" -> "https://www.tarkeon.in/services". */
 export function absoluteUrl(path = "/"): string {
   return new URL(path, site.url).toString();

@@ -9,7 +9,7 @@ import { FounderAvatar } from "@/components/sections/FounderAvatar";
 import { founder, site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { localBusinessSchema } from "@/lib/schema";
-import { whatsappLink } from "@/lib/utils";
+import { mailtoLink, telLink, whatsappLink } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact: Book a Free Consultation",
@@ -32,6 +32,7 @@ function ContactRow({ icon, title, children }: { icon: IconName; title: string; 
 }
 
 export default function ContactPage() {
+  const tel = telLink();
   const linkClass = "break-words text-fg-2 underline-offset-4 hover:text-fg hover:underline";
   return (
     <>
@@ -70,14 +71,14 @@ export default function ContactPage() {
               <Icon name="arrow-up-right" size={20} className="ml-auto text-fg-2 group-hover:text-fg" />
             </a>
             <ContactRow icon="mail" title="Email">
-              <a href={`mailto:${site.email}`} className={linkClass}>
+              <a href={mailtoLink()} className={linkClass}>
                 {site.email}
               </a>
             </ContactRow>
-            {site.phone && (
-              <ContactRow icon="chat" title="Phone">
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={linkClass}>
-                  {site.phone}
+            {tel && site.phoneDisplay && (
+              <ContactRow icon="phone" title="Phone">
+                <a href={tel} className={linkClass}>
+                  {site.phoneDisplay}
                 </a>
               </ContactRow>
             )}

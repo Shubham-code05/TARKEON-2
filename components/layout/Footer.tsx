@@ -4,7 +4,7 @@ import { Logo } from "@/components/Logo";
 import { industries } from "@/content/industries";
 import { services } from "@/content/services";
 import { legalNav, site } from "@/content/site";
-import { whatsappLink } from "@/lib/utils";
+import { mailtoLink, telLink, whatsappLink } from "@/lib/utils";
 
 const company = [
   { label: "About Tarkeon", href: "/about" },
@@ -35,6 +35,7 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const tel = telLink();
   return (
     <footer className="border-t border-line bg-bg-alt">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -48,7 +49,7 @@ export function Footer() {
           </p>
           <ul className="flex flex-col gap-1 text-sm">
             <li>
-              <a href={`mailto:${site.email}`} className="inline-flex min-h-9 items-center gap-2.5 text-fg-2 hover:text-fg">
+              <a href={mailtoLink()} className="inline-flex min-h-9 items-center gap-2.5 text-fg-2 hover:text-fg">
                 <Icon name="mail" size={16} className="text-muted" /> {site.email}
               </a>
             </li>
@@ -62,6 +63,13 @@ export function Footer() {
                 <Icon name="whatsapp" size={16} className="text-muted" /> {site.whatsappDisplay}
               </a>
             </li>
+            {tel && site.phoneDisplay && (
+              <li>
+                <a href={tel} className="inline-flex min-h-9 items-center gap-2.5 text-fg-2 hover:text-fg">
+                  <Icon name="phone" size={16} className="text-muted" /> {site.phoneDisplay}
+                </a>
+              </li>
+            )}
             <li className="inline-flex min-h-9 items-center gap-2.5 text-fg-2">
               <Icon name="map-pin" size={16} className="text-muted" /> {site.address.city}, {site.address.region}
             </li>

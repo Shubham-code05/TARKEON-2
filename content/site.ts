@@ -11,12 +11,15 @@ export const site = {
     "Tarkeon is a web, AI and automation studio in Lucknow building fast websites, web apps, online stores and AI chatbots for businesses across India.",
   // tarkeon.in redirects to www, so www is the canonical address
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.tarkeon.in").replace(/\/$/, ""),
+  // Contact details. Phone aur WhatsApp alag fields hain, taaki alag number lagana ho toh sirf yahan badlo.
   email: "tarkeontechnologies@gmail.com",
-  // WhatsApp number: country code ke saath, bina + aur space ke. Jaise: 919876543210
-  whatsapp: "918808804843",
-  whatsappDisplay: "+91 88088 04843",
-  // Phone number dikhana ho toh "+91 98765 43210" jaisa likho, warna null
-  phone: "+91 88088 04843" as string | null,
+  // Call ke liye number: + aur country code ke saath, bina space ke (tel: link aur JSON-LD mein jaata hai).
+  // Phone na dikhana ho toh phone aur phoneDisplay dono null kar do.
+  phone: "+919682001743" as string | null,
+  phoneDisplay: "+91 96820 01743" as string | null,
+  // WhatsApp number: country code ke saath, bina + aur space ke (wa.me link mein jaata hai). Jaise: 919876543210
+  whatsapp: "919682001743",
+  whatsappDisplay: "+91 96820 01743",
   address: {
     // Office ka pura pata ho toh street bharo, warna null (sirf shehar dikhega)
     street: null as string | null,

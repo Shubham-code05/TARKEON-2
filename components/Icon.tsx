@@ -36,6 +36,9 @@ const paths = {
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   "chevron-down": <path d="M6 9l6 6 6-6" />,
   "chevron-right": <path d="M9 6l6 6-6 6" />,
+  phone: (
+    <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />
+  ),
   mail: (
     <>
       <rect x="3" y="5" width="18" height="14" rx="2" />

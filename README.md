@@ -55,9 +55,11 @@ Ye API free hai (billing account ki zaroorat nahi). Free quota roz ke hazaaron c
 
 Pages kabhi text hardcode nahi karte. Sab `content/` folder se aata hai:
 
+**Contact details:** abhi phone aur WhatsApp dono +91 96820 01743 hain, email tarkeontechnologies@gmail.com. Number ya email badalna ho toh sirf `content/site.ts` edit karo: header, footer, contact page, WhatsApp button, mobile bar, forms aur JSON-LD sab wahin se lete hain. `phone` (`+919682001743`) tel: link aur schema mein jaata hai, `whatsapp` (`919682001743`) wa.me link mein. Phone aur WhatsApp ke liye alag number bhi rakh sakte ho.
+
 | File | Kya hai |
 | --- | --- |
-| `content/site.ts` | Naam, email, **WhatsApp number**, address, office hours, socials, founder, about page ki kahani, menu |
+| `content/site.ts` | Naam, **contact details** (`email`, `phone`, `phoneDisplay`, `whatsapp`, `whatsappDisplay`), address, office hours, socials, founder, about page ki kahani, menu |
 | `content/services.ts` | 6 services aur unke detail pages ka poora content (problems, deliverables, process, stack, price, FAQs) |
 | `content/industries.ts` | 5 industries aur unke pages. `home` block: homepage hero ka pill label, URL key (`?for=clinic`), headline, chatbot demo ke sawaal-jawab aur typical package. Problems ke `solution` "Sound familiar?" cards mein dikhte hain. |
 | `content/projects.ts` | Case studies (abhi khaali) |
