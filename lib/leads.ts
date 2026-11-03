@@ -189,11 +189,23 @@ function clientEmail(lead: Lead) {
   return { html, text };
 }
 
+/**
+ * Posts the lead to the Apps Script web app (docs/google-sheet-webhook.gs).
+ * Apps Script answers with a 302 to a googleusercontent.com URL, so the
+ * redirect must be followed. It always replies 200, even on errors, so the
+ * JSON body ({ ok: true } or { ok: false, error }) decides success.
+ */
 async function postToSheet(lead: Lead) {
+  const secret = process.env.GOOGLE_SHEET_SECRET;
+  if (!secret) console.warn("[lead] GOOGLE_SHEET_SECRET is not set; the sheet script will likely reply unauthorized.");
+
   const res = await fetch(process.env.GOOGLE_SHEET_WEBHOOK_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    redirect: "follow",
+    cache: "no-store",
     body: JSON.stringify({
+      secret,
       receivedAt: new Date().toISOString(),
       kind: lead.kind,
       name: lead.name,
@@ -204,9 +216,19 @@ async function postToSheet(lead: Lead) {
         .map(([k, v]) => `${k}: ${v}`)
         .join("\n"),
     }),
-    signal: AbortSignal.timeout(10_000),
+    signal: AbortSignal.timeout(8_000),
   });
-  if (!res.ok) throw new Error(`Sheet webhook responded ${res.status}`);
+  const text = await res.text();
+  let reply: { ok?: boolean; error?: string } | null = null;
+  try {
+    reply = JSON.parse(text);
+  } catch {
+    // Not JSON: usually a Google sign-in or error page (wrong URL or access not "Anyone")
+  }
+  if (!res.ok || reply?.ok !== true) {
+    throw new Error(`Sheet webhook failed (HTTP ${res.status}): ${reply ? JSON.stringify(reply) : text.slice(0, 200)}`);
+  }
+  console.info(`[lead] Sheet row added (${lead.kind}).`);
 }
 
 /**
@@ -216,6 +238,12 @@ async function postToSheet(lead: Lead) {
 export async function deliverLead(lead: Lead): Promise<boolean> {
   const hasEmail = Boolean(process.env.RESEND_API_KEY);
   const hasSheet = Boolean(process.env.GOOGLE_SHEET_WEBHOOK_URL);
+  // Only whether each is set, never the values
+  console.info(
+    `[lead] Channels: email ${hasEmail ? "set" : "not set"}, sheet URL ${hasSheet ? "set" : "not set"}, sheet secret ${
+      process.env.GOOGLE_SHEET_SECRET ? "set" : "not set"
+    }`,
+  );
 
   if (!hasEmail && !hasSheet) {
     if (process.env.NODE_ENV === "production") {

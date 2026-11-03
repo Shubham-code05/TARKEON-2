@@ -35,6 +35,7 @@ Sab `.env.example` mein likhe hain. Local ke liye `.env.local` mein, Vercel pe *
 | `LEAD_TO_EMAIL` | Nahi | Leads kis email pe aayein. Default: `content/site.ts` wala email. |
 | `LEAD_FROM_EMAIL` | Haan (Resend ke saath) | Bhejne wala address, jaise `Tarkeon <hello@tarkeon.in>`. Domain Resend mein verify hona chahiye (Resend → Domains → Add domain, phir DNS records daalo). |
 | `GOOGLE_SHEET_WEBHOOK_URL` | Nahi | Har lead Google Sheet mein bhi jaaye. Setup: `docs/google-sheet-webhook.gs` ke upar likha hai. |
+| `GOOGLE_SHEET_SECRET` | Haan (sheet ke liye) | Apps Script ke `SECRET` jaisa hi. Ye na ho toh script `unauthorized` deta hai aur row nahi banti. `NEXT_PUBLIC_` mat lagana. |
 | `PAGESPEED_API_KEY` | Haan (website check ke liye) | Homepage ka "Free website check" isi se Google PageSpeed test chalata hai. Free key lene ka tareeka neeche hai. |
 | `NEXT_PUBLIC_GA_ID` | Nahi | GA4 ID (`G-XXXXXXX`). Set karne par cookie banner dikhega aur GA sirf "Accept" ke baad load hoga. |
 

@@ -7,16 +7,24 @@
  * 3. Deploy → New deployment → type "Web app".
  *      Execute as: Me      Who has access: Anyone
  * 4. Click Deploy, allow the permissions, and copy the "Web app URL".
- * 5. Put that URL in GOOGLE_SHEET_WEBHOOK_URL (in .env.local and on Vercel). Redeploy the site.
+ * 5. Put that URL in GOOGLE_SHEET_WEBHOOK_URL and the SECRET below in GOOGLE_SHEET_SECRET
+ *    (in .env.local and on Vercel). Redeploy the site.
  *
  * If you change this script later, use Deploy → Manage deployments → Edit → New version,
  * so the URL stays the same.
  */
+var SECRET = "change-me-to-a-long-random-string";
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     var data = JSON.parse(e.postData.contents);
+    if (data.secret !== SECRET) {
+      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: "unauthorized" })).setMimeType(
+        ContentService.MimeType.JSON,
+      );
+    }
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
     sheet.appendRow([
       data.receivedAt || new Date().toISOString(),
