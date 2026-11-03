@@ -10,6 +10,7 @@ import { ExitIntent } from "@/components/layout/ExitIntent";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
+import { UtmCapture } from "@/components/layout/UtmCapture";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { RevealObserver } from "@/components/motion/RevealObserver";
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
+        <UtmCapture />
         <MotionProvider>
           <Header />
           <main id="main" className="flex-1">

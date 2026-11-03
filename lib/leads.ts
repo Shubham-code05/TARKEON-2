@@ -4,6 +4,7 @@ import { createRateLimiter } from "@/lib/rate-limit";
 import { site } from "@/content/site";
 import { formatINR } from "@/lib/utils";
 import type { Estimate } from "@/lib/estimate";
+import { calculatorAddons } from "@/content/pricing";
 
 // ---------- Validation ----------
 
@@ -32,6 +33,12 @@ const optionalEmail = z
   .transform((v) => (v ? v : undefined))
   .pipe(z.string().email("Please enter a valid email address.").optional());
 
+// Where the lead came from, filled by <LeadMeta /> in the browser
+const meta = {
+  page: optionalText(200),
+  utm: optionalText(300),
+};
+
 const consent = z.literal("on", { errorMap: () => ({ message: "Please agree so we can contact you." }) });
 
 export const contactSchema = z.object({
@@ -40,10 +47,13 @@ export const contactSchema = z.object({
   phone,
   email: optionalEmail,
   business: optionalText(120),
-  need: optionalText(60),
+  /** Chosen services, comma separated. */
+  need: optionalText(300),
   budget: optionalText(40),
   message: optionalText(2000),
-  source: optionalText(200),
+  /** "demo" when the visitor came from a free demo button. */
+  intent: optionalText(20),
+  ...meta,
   consent,
 });
 
@@ -58,6 +68,7 @@ export const calculatorSchema = z.object({
   carePlan: z.boolean().default(false),
   hosting: z.boolean().default(false),
   message: optionalText(1000),
+  ...meta,
   consent,
 });
 
@@ -76,6 +87,7 @@ export const careersSchema = z.object({
     .transform((v) => (v ? v : undefined))
     .pipe(z.string().url("Please enter a full link starting with https://").optional()),
   message: optionalText(2000),
+  ...meta,
   consent,
 });
 
@@ -110,7 +122,7 @@ export function leadRows(lead: Lead): [string, string][] {
     ["Email", lead.email],
   ];
   if (lead.kind === "contact") {
-    rows.push(["Business", lead.business], ["Needs", lead.need], ["Budget", lead.budget], ["Message", lead.message], ["Page", lead.source]);
+    rows.push(["Business", lead.business], ["Needs", lead.need], ["Budget", lead.budget], ["Message", lead.message]);
   } else if (lead.kind === "calculator") {
     const e = lead.estimate;
     rows.push(
@@ -126,6 +138,7 @@ export function leadRows(lead: Lead): [string, string][] {
   } else {
     rows.push(["Role", lead.role], ["Skills", lead.skills], ["Portfolio", lead.portfolio], ["Message", lead.message]);
   }
+  rows.push(["Page", lead.page], ["UTM", lead.utm]);
   return rows.filter((r): r is [string, string] => Boolean(r[1]));
 }
 
@@ -195,7 +208,7 @@ function clientEmail(lead: Lead) {
  * redirect must be followed. It always replies 200, even on errors, so the
  * JSON body ({ ok: true } or { ok: false, error }) decides success.
  */
-async function postToSheet(lead: Lead) {
+async function postToSheet(row: SheetRow) {
   const secret = process.env.GOOGLE_SHEET_SECRET;
   if (!secret) console.warn("[lead] GOOGLE_SHEET_SECRET is not set; the sheet script will likely reply unauthorized.");
 
@@ -204,18 +217,7 @@ async function postToSheet(lead: Lead) {
     headers: { "Content-Type": "application/json" },
     redirect: "follow",
     cache: "no-store",
-    body: JSON.stringify({
-      secret,
-      receivedAt: new Date().toISOString(),
-      kind: lead.kind,
-      name: lead.name,
-      phone: lead.phone ?? "",
-      email: lead.email ?? "",
-      details: leadRows(lead)
-        .slice(4)
-        .map(([k, v]) => `${k}: ${v}`)
-        .join("\n"),
-    }),
+    body: JSON.stringify({ secret, ...row }),
     signal: AbortSignal.timeout(8_000),
   });
   const text = await res.text();
@@ -228,7 +230,103 @@ async function postToSheet(lead: Lead) {
   if (!res.ok || reply?.ok !== true) {
     throw new Error(`Sheet webhook failed (HTTP ${res.status}): ${reply ? JSON.stringify(reply) : text.slice(0, 200)}`);
   }
-  console.info(`[lead] Sheet row added (${lead.kind}).`);
+  console.info(`[lead] Sheet row added (${row.source}).`);
+}
+
+// ---------- Google Sheet columns ----------
+
+/** Exactly the keys the Apps Script reads (plus `secret`, added when sending). Every value is plain text. */
+export type SheetRow = {
+  source: string;
+  name: string;
+  phone: string;
+  email: string;
+  business: string;
+  service: string;
+  budget: string;
+  message: string;
+  estimate: string;
+  website: string;
+  page: string;
+  utm: string;
+};
+
+const emptyRow: SheetRow = {
+  source: "",
+  name: "",
+  phone: "",
+  email: "",
+  business: "",
+  service: "",
+  budget: "",
+  message: "",
+  estimate: "",
+  website: "",
+  page: "",
+  utm: "",
+};
+
+function sheetRowFor(lead: Lead): SheetRow {
+  const base: SheetRow = {
+    ...emptyRow,
+    name: lead.name,
+    phone: lead.phone ?? "",
+    email: lead.email ?? "",
+    message: lead.message ?? "",
+    page: lead.page ?? "",
+    utm: lead.utm ?? "",
+  };
+  if (lead.kind === "contact") {
+    return {
+      ...base,
+      source: lead.intent === "demo" ? "Free demo request" : "Contact form",
+      business: lead.business ?? "",
+      service: lead.need ?? "",
+      budget: lead.budget ?? "",
+    };
+  }
+  if (lead.kind === "calculator") {
+    const e = lead.estimate;
+    const addonLabels = lead.addons
+      .map((id) => calculatorAddons.find((a) => a.id === id)?.label)
+      .filter((l): l is string => Boolean(l));
+    const parts = [`${formatINR(e.total)} first year`, `${formatINR(e.oneTime)} one-time`];
+    if (e.monthly) parts.push(`${formatINR(e.monthly)}/month care plan`);
+    return {
+      ...base,
+      source: "Cost calculator",
+      service: [e.typeLabel, ...addonLabels].join(", "),
+      estimate: parts.join(", "),
+    };
+  }
+  return {
+    ...base,
+    source: "Careers",
+    service: `${lead.role}: ${lead.skills}`,
+    website: lead.portfolio ?? "",
+  };
+}
+
+/**
+ * Logs a homepage website check to the sheet. There is no name or phone here,
+ * only the URL and scores, so a failure is logged and never shown to the visitor.
+ */
+export async function logWebsiteCheck(check: {
+  url: string;
+  scores: { performance: number; seo: number; accessibility: number; bestPractices: number };
+  page?: string;
+  utm?: string;
+}) {
+  if (!process.env.GOOGLE_SHEET_WEBHOOK_URL) return;
+  const s = check.scores;
+  await postToSheet({
+    ...emptyRow,
+    source: "Website check",
+    website: check.url,
+    message: `Speed ${s.performance}, SEO ${s.seo}, Accessibility ${s.accessibility}, Best practices ${s.bestPractices}`,
+    page: (check.page ?? "").slice(0, 200),
+    utm: (check.utm ?? "").slice(0, 300),
+  }).catch((err) => console.error("[lead] Website check not logged:", err));
 }
 
 /**
@@ -267,7 +365,7 @@ export async function deliverLead(lead: Lead): Promise<boolean> {
       }),
     );
   }
-  if (hasSheet) ownerJobs.push(postToSheet(lead));
+  if (hasSheet) ownerJobs.push(postToSheet(sheetRowFor(lead)));
 
   const results = await Promise.allSettled(ownerJobs);
   results.forEach((r) => r.status === "rejected" && console.error("[lead] Delivery failed:", r.reason));

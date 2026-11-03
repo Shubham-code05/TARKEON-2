@@ -69,6 +69,8 @@ export async function submitLead(_prev: LeadState, form: FormData): Promise<Lead
       carePlan: str(form, "carePlan") === "on",
       hosting: str(form, "hosting") === "on",
       message: str(form, "message"),
+      page: str(form, "page"),
+      utm: str(form, "utm"),
       consent: str(form, "consent"),
     });
     if (!parsed.success) return { status: "error", message: "Please fix the highlighted fields.", fieldErrors: fieldErrors(parsed.error) };
@@ -85,6 +87,8 @@ export async function submitLead(_prev: LeadState, form: FormData): Promise<Lead
       skills: str(form, "skills"),
       portfolio: str(form, "portfolio"),
       message: str(form, "message"),
+      page: str(form, "page"),
+      utm: str(form, "utm"),
       consent: str(form, "consent"),
     });
     if (!parsed.success) return { status: "error", message: "Please fix the highlighted fields.", fieldErrors: fieldErrors(parsed.error) };
@@ -96,10 +100,15 @@ export async function submitLead(_prev: LeadState, form: FormData): Promise<Lead
       phone: str(form, "phone"),
       email: str(form, "email"),
       business: str(form, "business"),
-      need: str(form, "need"),
+      need: form
+        .getAll("need")
+        .filter((v): v is string => typeof v === "string")
+        .join(", "),
       budget: str(form, "budget"),
       message: str(form, "message"),
-      source: str(form, "source"),
+      intent: str(form, "intent"),
+      page: str(form, "page"),
+      utm: str(form, "utm"),
       consent: str(form, "consent"),
     });
     if (!parsed.success) return { status: "error", message: "Please fix the highlighted fields.", fieldErrors: fieldErrors(parsed.error) };

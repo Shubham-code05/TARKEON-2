@@ -40,7 +40,7 @@ export function Hero({ motto, city, project }: HeroProps) {
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className={buttonClasses("primary", "lg")}>
+            <Link href="/contact?intent=demo" className={buttonClasses("primary", "lg")}>
               Get a Free Homepage Demo <Icon name="arrow" size={18} />
             </Link>
             <Link href="/work" className={buttonClasses("secondary", "lg")}>

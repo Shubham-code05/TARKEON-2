@@ -55,7 +55,7 @@ export default function WorkPage() {
               built for your own business, before you pay in full.
             </p>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Button href="/contact">Ask for a free demo</Button>
+              <Button href="/contact?intent=demo">Ask for a free demo</Button>
               <Button href="/" variant="secondary">
                 Try the chatbot demo
               </Button>

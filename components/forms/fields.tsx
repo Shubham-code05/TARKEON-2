@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, type InputHTMLAttributes, type ReactNode, type TextareaHTMLAttributes } from "react";
+import { readLeadMeta } from "@/lib/lead-meta";
 import { cn } from "@/lib/utils";
 
 const control =
@@ -181,6 +182,19 @@ export function ConsentField({ error }: { error?: string }) {
 }
 
 /** Hidden spam traps: a honeypot field and the time the form was opened. */
+/** Hidden page, UTM and intent fields, filled after load so they match the visitor's real URL. */
+export function LeadMeta() {
+  const [meta, setMeta] = useState({ page: "", utm: "", intent: "" });
+  useEffect(() => setMeta(readLeadMeta()), []);
+  return (
+    <>
+      <input type="hidden" name="page" value={meta.page} />
+      <input type="hidden" name="utm" value={meta.utm} />
+      <input type="hidden" name="intent" value={meta.intent} />
+    </>
+  );
+}
+
 export function SpamGuard() {
   const [startedAt, setStartedAt] = useState("");
   useEffect(() => setStartedAt(String(Date.now())), []);

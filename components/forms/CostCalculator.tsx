@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { domainHostingYearly, gstRate, type CalculatorAddon, type CalculatorType } from "@/content/pricing";
 import { calculateEstimate } from "@/lib/estimate";
 import { cn, formatINR } from "@/lib/utils";
-import { ConsentField, InputField, SpamGuard } from "./fields";
+import { ConsentField, InputField, LeadMeta, SpamGuard } from "./fields";
 import { FormError, FormSuccess } from "./FormStatus";
 import { useLeadForm } from "./useLeadForm";
 
@@ -71,6 +71,7 @@ export function CostCalculator({ types, addons, carePlanMonthly, whatsappNumber 
   return (
     <form action={formAction} onSubmit={onSubmit} noValidate className="relative grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-10">
       <input type="hidden" name="kind" value="calculator" />
+      <LeadMeta />
       <SpamGuard />
 
       <div className="flex flex-col gap-10">

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "rea
 import { TarkNetwork } from "@/components/brand/TarkNetwork";
 import { Icon } from "@/components/Icon";
 import { Button, buttonClasses } from "@/components/ui/Button";
+import { readLeadMeta } from "@/lib/lead-meta";
 import { cn } from "@/lib/utils";
 import { useCountUp } from "./useCountUp";
 
@@ -150,11 +151,12 @@ export function WebsiteCheck({ whatsappNumber, header }: { whatsappNumber: strin
       return;
     }
     setState({ status: "loading", url: value });
+    const { page, utm } = readLeadMeta();
     try {
       const res = await fetch("/api/site-check", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: value }),
+        body: JSON.stringify({ url: value, page, utm }),
       });
       const data = await res.json();
       if (!res.ok) setState({ status: "error", message: data.error ?? "Something went wrong. Please try again." });

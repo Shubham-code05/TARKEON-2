@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { logWebsiteCheck } from "@/lib/leads";
 import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 import { normaliseUrl, summarise, type PsiResponse, type SiteCheckResult } from "@/lib/site-check";
 
@@ -12,7 +13,11 @@ const isLimited = createRateLimiter(4, 10 * 60 * 1000); // 4 checks per 10 minut
 const cache = new Map<string, { at: number; result: SiteCheckResult }>();
 const CACHE_MS = 30 * 60 * 1000;
 
-const body = z.object({ url: z.string().max(300) });
+const body = z.object({
+  url: z.string().max(300),
+  page: z.string().max(200).optional(),
+  utm: z.string().max(300).optional(),
+});
 
 function fail(status: number, message: string) {
   return NextResponse.json({ error: message }, { status });
@@ -23,8 +28,13 @@ export async function POST(request: Request) {
   const url = parsed.success ? normaliseUrl(parsed.data.url) : null;
   if (!url) return fail(400, "That doesn’t look like a website address. Try something like yourbusiness.com");
 
+  const meta = parsed.success ? { page: parsed.data.page, utm: parsed.data.utm } : {};
+
   const cached = cache.get(url);
-  if (cached && Date.now() - cached.at < CACHE_MS) return NextResponse.json(cached.result);
+  if (cached && Date.now() - cached.at < CACHE_MS) {
+    await logWebsiteCheck({ ...cached.result, ...meta });
+    return NextResponse.json(cached.result);
+  }
 
   if (isLimited(await clientIp())) {
     return fail(429, "You’ve run a few checks already. Please try again in about 10 minutes, or message us on WhatsApp.");
@@ -60,5 +70,7 @@ export async function POST(request: Request) {
   const result = summarise(data, url);
   cache.set(url, { at: Date.now(), result });
   if (cache.size > 500) cache.delete(cache.keys().next().value!);
+  // Awaited (8s timeout, never throws) so the serverless function is not frozen mid-request
+  await logWebsiteCheck({ ...result, ...meta });
   return NextResponse.json(result);
 }

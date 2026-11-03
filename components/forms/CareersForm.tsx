@@ -2,7 +2,7 @@
 
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/ui/Button";
-import { ChoiceChips, ConsentField, InputField, SpamGuard, TextareaField } from "./fields";
+import { ChoiceChips, ConsentField, InputField, LeadMeta, SpamGuard, TextareaField } from "./fields";
 import { FormError, FormSuccess } from "./FormStatus";
 import { useLeadForm } from "./useLeadForm";
 
@@ -26,6 +26,7 @@ export function CareersForm({ whatsappNumber }: { whatsappNumber: string }) {
   return (
     <form action={formAction} onSubmit={onSubmit} noValidate className="relative flex flex-col gap-6">
       <input type="hidden" name="kind" value="careers" />
+      <LeadMeta />
       <SpamGuard />
       <div className="grid gap-6 sm:grid-cols-2">
         <InputField id="j-name" name="name" label="Your name" autoComplete="name" required error={errors.name} />
