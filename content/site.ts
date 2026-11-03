@@ -123,5 +123,10 @@ export const legalNav = [
   { label: "Refund policy", href: "/refund-policy" },
 ];
 
-// Legal pages pe "Last updated" date. Policy badlo toh ye date bhi badlo.
-export const legalLastUpdated = "2026-10-30";
+// Legal pages pe "Last updated" date, har page ki alag. Policy badlo toh usi page ki date badlo.
+export const legalLastUpdated = {
+  "/privacy-policy": "2026-11-03",
+  "/terms": "2026-10-30",
+  "/refund-policy": "2026-10-30",
+} as const;
+export type LegalPath = keyof typeof legalLastUpdated;

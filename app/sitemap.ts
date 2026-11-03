@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { industries } from "@/content/industries";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
-import { legalLastUpdated } from "@/content/site";
+import { legalLastUpdated, type LegalPath } from "@/content/site";
 import { getAllPosts } from "@/lib/blog";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/contact", 0.8, "yearly"],
     ["/careers", 0.3, "monthly"],
   ];
-  const legal = ["/privacy-policy", "/terms", "/refund-policy"];
+  const legal: LegalPath[] = ["/privacy-policy", "/terms", "/refund-policy"];
 
   return [
     ...staticPages.map(([path, priority, changeFrequency]) => ({ url: absoluteUrl(path), lastModified: now, changeFrequency, priority })),
@@ -33,6 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.7,
     })),
-    ...legal.map((path) => ({ url: absoluteUrl(path), lastModified: new Date(legalLastUpdated), changeFrequency: "yearly" as const, priority: 0.2 })),
+    ...legal.map((path) => ({ url: absoluteUrl(path), lastModified: new Date(legalLastUpdated[path]), changeFrequency: "yearly" as const, priority: 0.2 })),
   ];
 }
