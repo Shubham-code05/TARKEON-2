@@ -26,8 +26,6 @@ export default function CareersPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Careers", href: "/careers" }]}
-        eyebrow="Careers"
         title="No open roles right now, but let’s talk."
         description="We don’t have a full-time opening at the moment. We are always happy to hear from freelancers and interns who care about doing clean, honest work."
       />

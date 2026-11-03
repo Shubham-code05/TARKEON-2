@@ -26,8 +26,6 @@ export default function PricingPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Pricing", href: "/pricing" }]}
-        eyebrow="Pricing"
         title="Clear starting prices. Final quote in writing."
         description="Every project gets a fixed price after a free call. Pay 50% to start and the rest only after you approve the work."
         actions={

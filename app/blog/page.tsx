@@ -21,8 +21,6 @@ export default function BlogPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Blog", href: "/blog" }]}
-        eyebrow="Blog"
         title="Practical guides for growing your business online."
         description="Plain-English articles on websites, AI and automation for small business owners. No jargon, no hype."
       />

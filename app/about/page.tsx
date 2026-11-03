@@ -24,8 +24,6 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "About", href: "/about" }]}
-        eyebrow="About us"
         title="A small studio in Lucknow, building software that small businesses can afford."
         description={`${site.name} builds websites, web apps, AI assistants and automations for coaching institutes, clinics, restaurants and local businesses across India.`}
       />

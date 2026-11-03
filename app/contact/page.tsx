@@ -37,8 +37,6 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Contact", href: "/contact" }]}
-        eyebrow="Contact"
         title="Book your free consultation."
         description="Tell us a little about your business. We reply within one working day with honest advice, even if it’s “you don’t need us yet”."
       />

@@ -25,8 +25,6 @@ export default function WorkPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Work", href: "/work" }]}
-        eyebrow="Our work"
         title="Real projects, explained plainly."
         description="Every project shows who it was for, what was built and a live link you can open on your own phone."
       />

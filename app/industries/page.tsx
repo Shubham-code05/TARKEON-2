@@ -20,8 +20,6 @@ export default function IndustriesPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Industries", href: "/industries" }]}
-        eyebrow="Industries"
         title="Solutions shaped around your kind of business."
         description="A clinic and a coaching centre have very different problems. We start from yours, then pick the right mix of website, automation and AI."
         actions={

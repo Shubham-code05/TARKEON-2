@@ -24,8 +24,6 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Services", href: "/services" }]}
-        eyebrow="Services"
         title="Everything you need to win customers online, from one studio."
         description="Start with the one thing that will pay off fastest. Every service comes with a free consultation, a fixed quote in writing and support after launch."
         actions={

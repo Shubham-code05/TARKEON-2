@@ -24,8 +24,6 @@ export default function ProcessPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ name: "Process", href: "/process" }]}
-        eyebrow="Process"
         title="How we work, from the first call to after launch."
         description="No jargon and no surprises. Here is exactly what happens at each stage, what we need from you and what you get at the end."
         actions={
