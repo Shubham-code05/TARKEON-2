@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Container, Section, SectionHeader } from "@/components/ui/Section";
 import { getIndustry } from "@/content/industries";
-import { getProject, projects } from "@/content/projects";
+import { getProject, projects, workCategories } from "@/content/projects";
 import { getService } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { pageMetadata } from "@/lib/metadata";
@@ -40,6 +40,7 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   const industry = getIndustry(project.industry);
+  const category = industry ? undefined : workCategories.find((c) => c.id === project.industry);
   const usedServices = project.services.flatMap((s) => getService(s) ?? []);
   const review = testimonials.find((t) => t.project === project.slug);
   const more = projects.filter((p) => p.slug !== project.slug && (p.industry === project.industry || p.services.some((s) => project.services.includes(s))));
@@ -76,6 +77,12 @@ export default async function CaseStudyPage({ params }: Props) {
                   {industry.name}
                 </Link>
               </dd>
+            </div>
+          )}
+          {category && (
+            <div>
+              <dt className="text-muted">Industry</dt>
+              <dd className="mt-1 font-medium text-fg">{category.name}</dd>
             </div>
           )}
           {project.year && (

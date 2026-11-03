@@ -38,5 +38,25 @@
       "width": 780,
       "height": 1688
     }
+  },
+  "inonego": {
+    "desktop": {
+      "width": 1440,
+      "height": 4200
+    },
+    "mobile": {
+      "width": 780,
+      "height": 1688
+    }
+  },
+  "rhrp": {
+    "desktop": {
+      "width": 1440,
+      "height": 4200
+    },
+    "mobile": {
+      "width": 780,
+      "height": 1688
+    }
   }
 }

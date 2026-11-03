@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { industries } from "@/content/industries";
-import { projects } from "@/content/projects";
+import { projects, workCategories } from "@/content/projects";
 import { testimonials } from "@/content/testimonials";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -39,7 +39,7 @@ export default function WorkPage() {
           <FilterGrid
             columns={2}
             label="Filter projects by industry"
-            filters={industries.map((i) => ({ id: i.slug, label: i.name }))}
+            filters={[...industries.map((i) => ({ id: i.slug, label: i.name })), ...workCategories.map((c) => ({ id: c.id, label: c.label }))]}
             items={projects.map((p, i) => ({ id: p.slug, tags: [p.industry], node: <ProjectCard project={p} priority={i === 0} /> }))}
           />
         </Section>

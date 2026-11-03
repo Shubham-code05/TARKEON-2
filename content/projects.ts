@@ -27,6 +27,16 @@ import type { Project, ProjectMockup } from "./types";
 // },
 
 const credit = "Built by our founder while at HiBrands";
+const founderCredit = "Built by Tarkeon's founder";
+
+/**
+ * Project categories that are not one of the industries in content/industries.ts (those have their
+ * own pages). Used as extra filters on /work and as the "Industry" label on case studies.
+ */
+export const workCategories: { id: string; label: string; name: string }[] = [
+  { id: "services", label: "Services", name: "Services" },
+  { id: "organisation", label: "Organisations", name: "Organisation" },
+];
 
 const list: Project[] = [
   {
@@ -47,6 +57,27 @@ const list: Project[] = [
     liveUrl: "https://www.maxmiraclebuildcare.com/",
     credit,
     featured: true,
+  },
+  {
+    slug: "inonego",
+    name: "INONEGO",
+    client: "INONEGO",
+    industry: "services",
+    tag: "Marketing · YouTube promotion agency, India",
+    services: ["landing-pages"],
+    summary:
+      "Landing page for an independent YouTube promotion agency that runs official Google Ads campaigns for creators, brands and businesses.",
+    features: [
+      "Tiered pricing for view-based and subscriber-based plans",
+      "Quote, free consultation and contact forms with service selection",
+      "Online payment links, WhatsApp and call buttons",
+      "Six-step 'How it works', FAQ and a clear no-fake-views disclaimer",
+    ],
+    // Checked from the live site: Tailwind and Alpine.js CDN scripts, PayU payment links,
+    // a Google Apps Script form endpoint, a GTM container and Vercel response headers
+    stack: ["HTML", "Tailwind CSS", "Alpine.js", "PayU", "Google Apps Script", "Google Tag Manager", "Vercel"],
+    liveUrl: "https://inonego-landing-page.vercel.app/",
+    credit: founderCredit,
   },
   {
     slug: "paramount-psychiatry",
@@ -96,6 +127,27 @@ const list: Project[] = [
     stack: ["WordPress", "Elementor", "Bootstrap"],
     liveUrl: "https://absnews.in/",
     credit,
+  },
+  {
+    slug: "rhrp",
+    name: "Rashtriya Hindu Raksha Parishad (RHRP)",
+    client: "Rashtriya Hindu Raksha Parishad",
+    industry: "organisation",
+    tag: "Organisation · Registered non-profit, Lucknow",
+    services: ["websites", "web-apps"],
+    summary:
+      "Bilingual website for a registered organisation based in Lucknow, with online membership, digital ID cards, news, events and donations.",
+    features: [
+      "Hindi and English toggle",
+      "Online membership with a QR-code digital ID card sent on WhatsApp or email",
+      "Donation page, news, circulars, gallery and leadership directory",
+      "Privacy, terms and refund policy pages",
+    ],
+    // Checked from the live site: Next.js (X-Powered-By header, app router chunks), Tailwind CSS v3
+    // banner in the stylesheet, images served from Cloudinary, Vercel response headers
+    stack: ["Next.js", "React", "Tailwind CSS", "Cloudinary", "Vercel"],
+    liveUrl: "https://rhrp.in/",
+    credit: founderCredit,
   },
 ];
 
