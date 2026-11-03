@@ -21,9 +21,7 @@ export function ProjectsForYou({ projects }: { projects: Project[] }) {
   return (
     <div className="flex flex-col gap-6">
       {mine.length === 0 && (
-        <p className="text-sm text-muted">
-          No {active.label.toLowerCase()} projects to show yet, so here is our other recent work.
-        </p>
+        <p className="text-sm text-muted">Recent work across industries.</p>
       )}
       <article className="spotlight group grid overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition hover:border-accent/40 lg:grid-cols-[1.4fr_1fr]">
         <div className="flex items-center border-b border-line bg-surface-2 p-5 md:p-8 lg:border-r lg:border-b-0">

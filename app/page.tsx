@@ -220,12 +220,12 @@ export default function Home() {
 
       <Section aria-labelledby="process-title">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
+          <div className="flex flex-col gap-8 lg:sticky lg:top-[120px] lg:self-start">
             <SectionHeader
               eyebrow="How we work"
               id="process-title"
               title="From first call to launch, step by step."
-              description={`Every stage has a clear timeline and you approve each one. You see a free homepage demo within ${site.demoPromise}, before you commit.`}
+              description="Fixed price and timeline in writing, a free homepage demo before you commit, and weekly updates while we build."
               className="mb-0! md:mb-0!"
             />
             <div className="flex flex-col items-start gap-3">
@@ -248,12 +248,12 @@ export default function Home() {
 
       <Section aria-labelledby="faq-title">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
-          <div className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
+          <div className="flex flex-col gap-8 lg:sticky lg:top-[120px] lg:self-start">
             <SectionHeader
               eyebrow="Questions"
               id="faq-title"
               title="Answers before you ask."
-              description="Cost, timelines, hosting, SEO and what happens after launch. Don’t see your question? Ask us directly."
+              description="Can’t find what you need? Message us and we’ll reply within one working day."
               className="mb-0! md:mb-0!"
             />
             <a
@@ -278,7 +278,7 @@ export default function Home() {
             <h2 id="final-cta" className="mx-auto max-w-3xl text-h1 text-white">
               Let’s Build Something Great Together.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold text-white">
+            <p className="mx-auto mt-4 max-w-2xl text-lg font-medium text-white/80">
               Free homepage demo in {site.demoPromise}. No commitment.
             </p>
             <p className="mx-auto mt-3 max-w-2xl text-lead text-white/90">
